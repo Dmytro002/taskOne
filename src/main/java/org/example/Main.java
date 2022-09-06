@@ -8,15 +8,15 @@ import static java.util.stream.Collectors.toCollection;
 
 public class Main {
     public String arrayChallenge(int[] arr) {
-        Set<Pair> setPair = new LinkedHashSet<>();
+        Set<Pair> pairs = new LinkedHashSet<>();
         for (int i = 0; i < arr.length; i += 2) {
-            setPair.add(new Pair(arr[i], arr[i + 1]));
+            pairs.add(new Pair(arr[i], arr[i + 1]));
         }
-        Set<Pair> setWithoutReversedPair = setPair.stream()
-                .filter(p -> !setPair.contains(new Pair(p.getY(), p.getX())) || p.getX() == p.getY())
+        Set<Pair> withoutReversedPair = pairs.stream()
+                .filter(p -> !pairs.contains(new Pair(p.getY(), p.getX())) || p.getX() == p.getY())
                 .collect(toCollection(LinkedHashSet::new));
 
-        return setWithoutReversedPair.isEmpty() ? "yes" : buildStringFromSet(setWithoutReversedPair);
+        return withoutReversedPair.isEmpty() ? "yes" : buildStringFromSet(withoutReversedPair);
     }
 
     private String buildStringFromSet(Set<Pair> set) {
